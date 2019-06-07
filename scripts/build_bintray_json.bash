@@ -6,7 +6,7 @@ TEMPLATE_FILE="bintray.json.tmpl"
 DST_DIR="../bintray"
 SPEC_FILE="../rpmbuild/SPECS/nginx.spec"
 
-VERSION=$(sed -ne 's/^Version:[[:space:]]*\([.0-9]*\).*/\1/p' "$SPEC_FILE")
+VERSION=$(sed -ne 's/^%define[[:space:]]*main_version[[:space:]]*\([.0-9]*\).*/\1/p' "$SPEC_FILE")
 RELEASE=$(sed -ne 's/^Release:[[:space:]]*\([.0-9]*\).*/\1/p' "$SPEC_FILE")
 
 PKG_VERSION="${VERSION}-${RELEASE}"
