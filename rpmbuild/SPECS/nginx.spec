@@ -51,6 +51,11 @@ BuildRequires: libopenssl-devel
 %define _debugsource_template %{nil}
 %endif
 
+# Amazon Linux
+%if 0%{?amzn} >= 1
+%define dist .amzn%{?amzn}
+%endif
+
 # end of distribution specific definitions
 
 %define main_version 1.17.0
