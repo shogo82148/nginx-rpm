@@ -3,7 +3,7 @@ TARGZ_FILE := nginx.tar.gz
 IMAGE_NAME := nginx-package
 amazonlinux2: IMAGE_NAME := $(IMAGE_NAME)-amazonlinux2
 
-.PHONY: all clean amazonlinux2
+.PHONY: all clean amazonlinux2 bintray
 
 all: amazonlinux2
 amazonlinux2: amazonlinux2.build
@@ -25,6 +25,11 @@ rpmbuild/SOURCES/$(SOURCE_ARCHIVE):
 	tar -xzf tmp/$(TARGZ_FILE) -C $@
 	rm -rf tmp Dockerfile
 	docker images | grep -q $(IMAGE_NAME) && docker rmi $(IMAGE_NAME) || true
+
+bintray:
+	./scripts/build_bintray_json.bash \
+		nginx \
+		nginx-debuginfo
 
 clean:
 	rm -rf *.build.bak *.build bintray tmp Dockerfile
