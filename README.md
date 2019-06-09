@@ -12,7 +12,7 @@ That's why I created this.
 
 ## How to use prebuilt RPM
 
-To add NGINX yum repository, create a file named `/etc/yum.repos.d/bintray-shogo82148-nginx-rpm.repo.repo` and paste the configurations below:
+To add NGINX yum repository, create a file named `/etc/yum.repos.d/bintray-shogo82148-nginx-rpm.repo` and paste the configurations below:
 
 ```ini
 #bintray-shogo82148-h2o-rpm - packages by shogo82148 from Bintray
