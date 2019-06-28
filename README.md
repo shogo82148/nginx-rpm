@@ -15,19 +15,19 @@ That's why I created this.
 To add NGINX yum repository, create a file named `/etc/yum.repos.d/bintray-shogo82148-nginx-rpm.repo` and paste the configurations below:
 
 ```ini
-#bintray-shogo82148-h2o-rpm - packages by shogo82148 from Bintray
-[bintray-shogo82148-h2o-rpm]
-name=bintray-shogo82148-h2o-rpm
+#bintray-shogo82148-nginx-rpm - packages by shogo82148 from Bintray
+[bintray-shogo82148-nginx-rpm]
+name=bintray-shogo82148-nginx-rpm
 baseurl=https://dl.bintray.com/shogo82148/nginx-rpm/amazonlinux2/$releasever/$basearch/
 gpgcheck=0
 repo_gpgcheck=1
 enabled=1
-gpgkey=https://bintray.com/api/v1/usrs/shogo82148/keys/gpg/public.key
+gpgkey=https://bintray.com/user/downloadSubjectPublicKey?username=shogo82148
 ```
 
 Once the file is correctly saved, you can install packages in the repository by
 
 ```bash
-rpm --import https://bintray.com/api/v1/usrs/shogo82148/keys/gpg/public.key
+rpm --import https://bintray.com/user/downloadSubjectPublicKey?username=shogo82148
 yum install nginx
 ```
