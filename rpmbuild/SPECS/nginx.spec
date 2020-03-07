@@ -333,7 +333,7 @@ fi
 
 %changelog
 * Sat Mar 14 2020 Ichinose Shogo <shogo82148@gmail.com>
-- 1.17.8
+- 1.17.9
 
 * Thu Feb 13 2020 Ichinose Shogo <shogo82148@gmail.com>
 - 1.17.8
