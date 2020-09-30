@@ -1,4 +1,4 @@
-SOURCE_ARCHIVE := nginx-1.19.2.tar.gz
+SOURCE_ARCHIVE := nginx-1.19.3.tar.gz
 TARGZ_FILE := nginx.tar.gz
 IMAGE_NAME := nginx-package
 amazonlinux2: IMAGE_NAME := $(IMAGE_NAME)-amazonlinux2
