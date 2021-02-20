@@ -27,3 +27,4 @@ clean:
 	rm -rf *.build.bak *.build tmp
 	docker rmi $(IMAGE_NAME)-amazonlinux2 || true
 	docker rmi $(IMAGE_NAME)-centos7 || true
+	docker rmi $(IMAGE_NAME)-centos8 || true
