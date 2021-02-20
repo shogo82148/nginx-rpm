@@ -2,11 +2,12 @@ SOURCE_ARCHIVE := nginx-1.19.5.tar.gz
 TARGZ_FILE := nginx.tar.gz
 IMAGE_NAME := nginx-package
 
-.PHONY: all clean amazonlinux2 centos7
+.PHONY: all clean amazonlinux2 centos7 centos8
 
 all: amazonlinux2
 amazonlinux2: amazonlinux2.build
 centos7: centos7.build
+centos8: centos8.build
 
 rpmbuild/SOURCES/$(SOURCE_ARCHIVE):
 	curl -SL http://nginx.org/download/$(SOURCE_ARCHIVE) -o rpmbuild/SOURCES/$(SOURCE_ARCHIVE)
