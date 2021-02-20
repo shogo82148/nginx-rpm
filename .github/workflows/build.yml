@@ -15,12 +15,17 @@ jobs:
       matrix:
         distribution:
           - amazonlinux2
+        platform:
+          - linux/amd64
+          - linux/arm64
 
     steps:
       - uses: actions/checkout@v2
       - name: build
         run: |
           make ${{ matrix.distribution }}
+        env:
+          PLATFORM: ${{ matrix.platform }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
