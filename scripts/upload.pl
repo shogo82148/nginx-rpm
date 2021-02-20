@@ -30,3 +30,5 @@ sub upload {
 }
 
 upload "amazonlinux2", "amazonlinux/2";
+upload "centos7", "centos/7";
+upload "centos8", "centos/8";
