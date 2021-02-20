@@ -1,5 +1,4 @@
-nginx Unofficial RPM package builder
-==================================
+# nginx Unofficial RPM package builder
 
 [![Build Status](https://travis-ci.com/shogo82148/nginx-rpm.svg?branch=master)](https://travis-ci.com/shogo82148/nginx-rpm)
 
@@ -9,25 +8,30 @@ It provides [nginx](https://www.nginx.com/) RPM spec file and required files to 
 while there is no RPM for Amazon Linux 2.
 That's why I created this.
 
-
 ## How to use prebuilt RPM
-
-To add NGINX yum repository, create a file named `/etc/yum.repos.d/bintray-shogo82148-nginx-rpm.repo` and paste the configurations below:
-
-```ini
-#bintray-shogo82148-nginx-rpm - packages by shogo82148 from Bintray
-[bintray-shogo82148-nginx-rpm]
-name=bintray-shogo82148-nginx-rpm
-baseurl=https://dl.bintray.com/shogo82148/nginx-rpm/amazonlinux2/$releasever/$basearch/
-gpgcheck=0
-repo_gpgcheck=1
-enabled=1
-gpgkey=https://bintray.com/user/downloadSubjectPublicKey?username=shogo82148
-```
 
 Once the file is correctly saved, you can install packages in the repository by
 
 ```bash
-rpm --import https://bintray.com/user/downloadSubjectPublicKey?username=shogo82148
 yum install nginx
+```
+
+### Amazon Linux 2
+
+To add Fluent Bit yum repository, create a file named `/etc/yum.repos.d/shogo82148.repo`.
+
+```ini
+# shogo82148-rpm - packages by shogo82148
+[shogo82148-rpm]
+name=shogo82148-rpm
+baseurl=https://shogo82148-rpm-repository.s3-ap-northeast-1.amazonaws.com/amazonlinux/$releasever/$basearch/
+gpgcheck=1
+enabled=1
+gpgkey=https://shogo82148-rpm-repository.s3-ap-northeast-1.amazonaws.com/RPM-GPG-KEY-shogo82148
+```
+
+Or install the RPM package for configure the repository.
+
+```
+yum install -y https://shogo82148-rpm-repository.s3-ap-northeast-1.amazonaws.com/amazonlinux/2/noarch/shogo82148/shogo82148-1.0.0-1.amzn2.noarch.rpm
 ```
