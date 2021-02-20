@@ -20,7 +20,7 @@ sub upload {
     while (my $rpm = <$FindBin::Bin/../$variant.build/RPMS/x86_64/*.x86_64.rpm>) {
         my $package = "nginx";
         $package .= "-debuginfo" if $rpm =~ /debuginfo/;
-        execute("aws", "s3", "cp", "--dryrun", $rpm, "s3://shogo82148-rpm-temporary/$prefix/x86_64/$package/");
+        execute("aws", "s3", "cp", $rpm, "s3://shogo82148-rpm-temporary/$prefix/x86_64/$package/");
     }
 }
 
