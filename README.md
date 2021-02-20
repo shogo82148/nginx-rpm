@@ -1,6 +1,6 @@
 # nginx Unofficial RPM package builder
 
-[![Build Status](https://travis-ci.com/shogo82148/nginx-rpm.svg?branch=master)](https://travis-ci.com/shogo82148/nginx-rpm)
+[![build](https://github.com/shogo82148/nginx-rpm/actions/workflows/build.yml/badge.svg)](https://github.com/shogo82148/nginx-rpm/actions/workflows/build.yml)
 
 It provides [nginx](https://www.nginx.com/) RPM spec file and required files to build RPM for Amazon Linux 2.
 
