@@ -332,8 +332,8 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
-* Thu Thu 01 2021 Ichinose Shogo <shogo82148@gmail.com>
-- 1.19.8
+* Thu Apr 01 2021 Ichinose Shogo <shogo82148@gmail.com>
+- 1.19.9
 
 * Thu Mar 11 2021 Ichinose Shogo <shogo82148@gmail.com>
 - 1.19.8
