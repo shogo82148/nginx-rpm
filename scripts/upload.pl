@@ -5,6 +5,12 @@ use strict;
 use warnings;
 use FindBin;
 
+our @options = ('--dryrun');
+
+if (($ENV{GITHUB_EVENT_NAME} || '') eq 'release') {
+    @options = ();
+}
+
 sub execute {
     my @arg = @_;
     my $cmd = join " ", @arg;
@@ -26,12 +32,12 @@ sub upload {
     my ($variant, $prefix) = @_;
     while (my $rpm = <$FindBin::Bin/../$variant.build/RPMS/x86_64/*.x86_64.rpm>) {
         my $package = package_name($rpm);
-        execute("aws", "s3", "cp", $rpm, "s3://shogo82148-rpm-temporary/$prefix/x86_64/$package/");
+        execute("aws", "s3", "cp", @options, $rpm, "s3://shogo82148-rpm-temporary/$prefix/x86_64/$package/");
     }
     while (my $rpm = <$FindBin::Bin/../$variant.build/RPMS/aarch64/*.aarch64.rpm>) {
         my $package = package_name($rpm);
         $package .= "-debuginfo" if $rpm =~ /debuginfo/;
-        execute("aws", "s3", "cp", $rpm, "s3://shogo82148-rpm-temporary/$prefix/aarch64/$package/");
+        execute("aws", "s3", "cp", @options, $rpm, "s3://shogo82148-rpm-temporary/$prefix/aarch64/$package/");
     }
 }
 
