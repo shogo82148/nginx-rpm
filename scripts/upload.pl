@@ -36,7 +36,6 @@ sub upload {
     }
     while (my $rpm = <$FindBin::Bin/../$variant.build/RPMS/aarch64/*.aarch64.rpm>) {
         my $package = package_name($rpm);
-        $package .= "-debuginfo" if $rpm =~ /debuginfo/;
         execute("aws", "s3", "cp", @options, $rpm, "s3://shogo82148-rpm-temporary/$prefix/aarch64/$package/");
     }
 }
