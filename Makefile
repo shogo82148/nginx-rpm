@@ -1,4 +1,4 @@
-SOURCE_ARCHIVE := nginx-1.19.10.tar.gz
+SOURCE_ARCHIVE := nginx-1.21.0.tar.gz
 TARGZ_FILE := nginx.tar.gz
 IMAGE_NAME := nginx-package
 
