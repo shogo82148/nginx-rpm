@@ -58,7 +58,7 @@ BuildRequires: libopenssl-devel
 
 # end of distribution specific definitions
 
-%define main_version 1.19.10
+%define main_version 1.21.0
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
