@@ -2,13 +2,14 @@ SOURCE_ARCHIVE := nginx-1.21.0.tar.gz
 TARGZ_FILE := nginx.tar.gz
 IMAGE_NAME := nginx-package
 
-.PHONY: all clean amazonlinux2 centos7 centos8 almalinux8
+.PHONY: all clean amazonlinux2 centos7 centos8 almalinux8 rockylinux8
 
 all: amazonlinux2
 amazonlinux2: amazonlinux2.build
 centos7: centos7.build
 centos8: centos8.build
 almalinux8: almalinux8.build
+rockylinux8: rockylinux8.build
 
 rpmbuild/SOURCES/$(SOURCE_ARCHIVE):
 	curl -SL http://nginx.org/download/$(SOURCE_ARCHIVE) -o rpmbuild/SOURCES/$(SOURCE_ARCHIVE)
@@ -30,3 +31,4 @@ clean:
 	docker rmi $(IMAGE_NAME)-centos7 || true
 	docker rmi $(IMAGE_NAME)-centos8 || true
 	docker rmi $(IMAGE_NAME)-almalinux8 || true
+	docker rmi $(IMAGE_NAME)-rockylinux8 || true
