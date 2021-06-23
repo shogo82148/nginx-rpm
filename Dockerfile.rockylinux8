@@ -1,0 +1,10 @@
+FROM rockylinux/rockylinux:8
+ENV HOME /
+RUN dnf update -y
+RUN dnf install -y rpm-build redhat-rpm-config rpmdevtools gcc-c++ tar make openssl-devel zlib-devel pcre-devel
+RUN rpmdev-setuptree
+ADD ./rpmbuild/ /rpmbuild/
+RUN chown -R root:root /rpmbuild
+RUN rpmbuild -ba /rpmbuild/SPECS/nginx.spec
+RUN tar -czf /tmp/nginx.tar.gz -C /rpmbuild RPMS SRPMS
+CMD ["/bin/true"]
