@@ -24,7 +24,7 @@ docker buildx build \
 docker run --platform "$PLATFORM" --name "$IMAGE_NAME-tmp" "$IMAGE_NAME"
 mkdir -p "$ROOT/tmp"
 docker wait "$IMAGE_NAME-tmp"
-	docker cp "$IMAGE_NAME-tmp:/tmp/$TARGZ_FILE" "$ROOT/tmp"
+docker cp "$IMAGE_NAME-tmp:/tmp/$TARGZ_FILE" "$ROOT/tmp"
 docker rm "$IMAGE_NAME-tmp"
 
 mkdir -p "$DISTRO.build"
