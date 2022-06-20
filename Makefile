@@ -3,7 +3,7 @@ TARGZ_FILE := nginx.tar.gz
 IMAGE_NAME := nginx-package
 
 .PHONY: all
-all: amazonlinux2 centos7 almalinux8 rockylinux8
+all: amazonlinux2 centos7 almalinux8 almalinux9 rockylinux8
 
 .PHONY: amazonlinux2
 amazonlinux2: amazonlinux2.build
@@ -13,6 +13,9 @@ centos7: centos7.build
 
 .PHONY: almalinux8
 almalinux8: almalinux8.build
+
+.PHONY: almalinux9
+almalinux9: almalinux9.build
 
 .PHONY: rockylinux8
 rockylinux8: rockylinux8.build
@@ -46,6 +49,10 @@ test-centos7:
 test-almalinux8:
 	./scripts/test.sh almalinux8
 
+.PHONY: test-almalinux9
+test-almalinux9:
+	./scripts/test.sh almalinux9
+
 .PHONY: test-rockylinux8
 test-rockylinux8:
 	./scripts/test.sh rockylinux8
@@ -56,4 +63,5 @@ clean:
 	docker rmi $(IMAGE_NAME)-amazonlinux2 || true
 	docker rmi $(IMAGE_NAME)-centos7 || true
 	docker rmi $(IMAGE_NAME)-almalinux8 || true
+	docker rmi $(IMAGE_NAME)-almalinux9 || true
 	docker rmi $(IMAGE_NAME)-rockylinux8 || true
