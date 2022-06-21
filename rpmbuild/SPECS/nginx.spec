@@ -4,15 +4,10 @@
 %define nginx_group nginx
 %define nginx_loggroup adm
 
-# distribution specific definitions
-%define use_systemd (0%{?rhel} >= 7 || 0%{?fedora} >= 19 || 0%{?suse_version} >= 1315 || 0%{?amzn} >= 2)
-
-%if %{use_systemd}
 BuildRequires: systemd
 Requires(post): systemd
 Requires(preun): systemd
 Requires(postun): systemd
-%endif
 
 %if 0%{?rhel}
 %define _group System Environment/Daemons
@@ -86,7 +81,6 @@ Group: %{_group}
 
 Source0: http://nginx.org/download/%{name}-%{version}.tar.gz
 Source1: logrotate
-Source2: nginx.init.in
 Source3: nginx.sysconf
 Source4: nginx.conf
 Source5: nginx.vh.default.conf
@@ -116,11 +110,6 @@ a mail proxy server.
 
 %prep
 %setup -q
-cp %{SOURCE2} .
-sed -e 's|%%DEFAULTSTART%%|2 3 4 5|g' -e 's|%%DEFAULTSTOP%%|0 1 6|g' \
-    -e 's|%%PROVIDES%%|nginx|g' < %{SOURCE2} > nginx.init
-sed -e 's|%%DEFAULTSTART%%||g' -e 's|%%DEFAULTSTOP%%|0 1 2 3 4 5 6|g' \
-    -e 's|%%PROVIDES%%|nginx-debug|g' < %{SOURCE2} > nginx-debug.init
 
 %build
 ./configure %{BASE_CONFIGURE_ARGS} \
@@ -173,7 +162,6 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
 %{__install} -p -D -m 0644 %{bdir}/objs/nginx.8 \
     $RPM_BUILD_ROOT%{_mandir}/man8/nginx.8
 
-%if %{use_systemd}
 # install systemd-specific files
 %{__mkdir} -p $RPM_BUILD_ROOT%{_unitdir}
 %{__install} -m644 %SOURCE8 \
@@ -185,12 +173,6 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
     $RPM_BUILD_ROOT%{_libexecdir}/initscripts/legacy-actions/nginx/upgrade
 %{__install} -m755 %SOURCE13 \
     $RPM_BUILD_ROOT%{_libexecdir}/initscripts/legacy-actions/nginx/check-reload
-%else
-# install SYSV init stuff
-%{__mkdir} -p $RPM_BUILD_ROOT%{_initrddir}
-%{__install} -m755 nginx.init $RPM_BUILD_ROOT%{_initrddir}/nginx
-%{__install} -m755 nginx-debug.init $RPM_BUILD_ROOT%{_initrddir}/nginx-debug
-%endif
 
 # install log rotation stuff
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d
@@ -240,15 +222,10 @@ cat /dev/null > debugsourcefiles.list
 %config(noreplace) %{_sysconfdir}/logrotate.d/nginx
 %config(noreplace) %{_sysconfdir}/sysconfig/nginx
 %config(noreplace) %{_sysconfdir}/sysconfig/nginx-debug
-%if %{use_systemd}
 %{_unitdir}/nginx.service
 %{_unitdir}/nginx-debug.service
 %dir %{_libexecdir}/initscripts/legacy-actions/nginx
 %{_libexecdir}/initscripts/legacy-actions/nginx/*
-%else
-%{_initrddir}/nginx
-%{_initrddir}/nginx-debug
-%endif
 
 %attr(0755,root,root) %dir %{_libdir}/nginx
 %attr(0755,root,root) %dir %{_libdir}/nginx/modules
@@ -274,13 +251,8 @@ exit 0
 %post
 # Register the nginx service
 if [ $1 -eq 1 ]; then
-%if %{use_systemd}
     /usr/bin/systemctl preset nginx.service >/dev/null 2>&1 ||:
     /usr/bin/systemctl preset nginx-debug.service >/dev/null 2>&1 ||:
-%else
-    /sbin/chkconfig --add nginx
-    /sbin/chkconfig --add nginx-debug
-%endif
     # print site info
     cat <<BANNER
 ----------------------------------------------------------------------
@@ -319,20 +291,12 @@ fi
 
 %preun
 if [ $1 -eq 0 ]; then
-%if %use_systemd
     /usr/bin/systemctl --no-reload disable nginx.service >/dev/null 2>&1 ||:
     /usr/bin/systemctl stop nginx.service >/dev/null 2>&1 ||:
-%else
-    /sbin/service nginx stop > /dev/null 2>&1
-    /sbin/chkconfig --del nginx
-    /sbin/chkconfig --del nginx-debug
-%endif
 fi
 
 %postun
-%if %use_systemd
 /usr/bin/systemctl daemon-reload >/dev/null 2>&1 ||:
-%endif
 if [ $1 -ge 1 ]; then
     /sbin/service nginx status  >/dev/null 2>&1 || exit 0
     /sbin/service nginx upgrade >/dev/null 2>&1 || echo \
