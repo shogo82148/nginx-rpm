@@ -170,9 +170,7 @@ cd $RPM_BUILD_ROOT%{_sysconfdir}/nginx && \
     $RPM_BUILD_ROOT%{_unitdir}/nginx-debug.service
 %{__mkdir} -p $RPM_BUILD_ROOT%{_libexecdir}/initscripts/legacy-actions/nginx
 %{__install} -m755 %SOURCE9 \
-    $RPM_BUILD_ROOT%{_libexecdir}/initscripts/legacy-actions/nginx/upgrade
-%{__install} -m755 %SOURCE13 \
-    $RPM_BUILD_ROOT%{_libexecdir}/initscripts/legacy-actions/nginx/check-reload
+    $RPM_BUILD_ROOT%{_sbindir}/nginx-upgrade
 
 # install log rotation stuff
 %{__mkdir} -p $RPM_BUILD_ROOT%{_sysconfdir}/logrotate.d
@@ -204,6 +202,7 @@ cat /dev/null > debugsourcefiles.list
 
 %{_sbindir}/nginx
 %{_sbindir}/nginx-debug
+%{_sbindir}/nginx-upgrade
 
 %dir %{_sysconfdir}/nginx
 %dir %{_sysconfdir}/nginx/conf.d
@@ -224,8 +223,6 @@ cat /dev/null > debugsourcefiles.list
 %config(noreplace) %{_sysconfdir}/sysconfig/nginx-debug
 %{_unitdir}/nginx.service
 %{_unitdir}/nginx-debug.service
-%dir %{_libexecdir}/initscripts/legacy-actions/nginx
-%{_libexecdir}/initscripts/legacy-actions/nginx/*
 
 %attr(0755,root,root) %dir %{_libdir}/nginx
 %attr(0755,root,root) %dir %{_libdir}/nginx/modules
@@ -298,8 +295,7 @@ fi
 %postun
 /usr/bin/systemctl daemon-reload >/dev/null 2>&1 ||:
 if [ $1 -ge 1 ]; then
-    /sbin/service nginx status  >/dev/null 2>&1 || exit 0
-    /sbin/service nginx upgrade >/dev/null 2>&1 || echo \
+    %{_sbindir}/nginx-upgrade >/dev/null 2>&1 || echo \
         "Binary upgrade failed, please check nginx's error.log"
 fi
 
