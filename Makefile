@@ -21,7 +21,7 @@ almalinux9: almalinux9.build
 rockylinux8: rockylinux8.build
 
 .PHONY: rockylinux9
-rockylinux8: rockylinux9.build
+rockylinux9: rockylinux9.build
 
 rpmbuild/SOURCES/$(SOURCE_ARCHIVE):
 	curl -SL https://nginx.org/download/$(SOURCE_ARCHIVE) -o rpmbuild/SOURCES/$(SOURCE_ARCHIVE)
