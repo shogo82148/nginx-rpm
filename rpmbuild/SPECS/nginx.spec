@@ -58,7 +58,7 @@ BuildRequires: libopenssl-devel
 
 # end of distribution specific definitions
 
-%define main_version 1.21.5
+%define main_version 1.23.2
 %define main_release 1%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
@@ -332,6 +332,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Wed Oct 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 1.23.2-1
+- 1.23.2
+
 * Fri Dec 31 2021 Ichinose Shogo <shogo82148@gmail.com>
 - 1.21.5
 
