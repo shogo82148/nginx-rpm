@@ -3,7 +3,7 @@ TARGZ_FILE := nginx.tar.gz
 IMAGE_NAME := nginx-package
 
 .PHONY: all
-all: amazonlinux2 centos7 almalinux8 almalinux9 rockylinux8
+all: amazonlinux2 centos7 almalinux8 almalinux9 rockylinux8 rockylinux9
 
 .PHONY: amazonlinux2
 amazonlinux2: amazonlinux2.build
@@ -20,6 +20,9 @@ almalinux9: almalinux9.build
 .PHONY: rockylinux8
 rockylinux8: rockylinux8.build
 
+.PHONY: rockylinux9
+rockylinux8: rockylinux9.build
+
 rpmbuild/SOURCES/$(SOURCE_ARCHIVE):
 	curl -SL https://nginx.org/download/$(SOURCE_ARCHIVE) -o rpmbuild/SOURCES/$(SOURCE_ARCHIVE)
 
@@ -35,7 +38,7 @@ upload:
 	./scripts/upload.pl
 
 .PHONY: test
-test: test-amazonlinux2 test-centos7 test-almalinux8 test-rockylinux8
+test: test-amazonlinux2 test-centos7 test-almalinux8 test-almalinux9 test-rockylinux8 test-rockylinux9
 
 .PHONY: test-amazonlinux2
 test-amazonlinux2:
@@ -57,6 +60,10 @@ test-almalinux9:
 test-rockylinux8:
 	./scripts/test.sh rockylinux8
 
+.PHONY: test-rockylinux9
+test-rockylinux9:
+	./scripts/test.sh rockylinux9
+
 clean:
 	rm -rf *.build.bak *.build
 	rm -rf rpmbuild/SOURCES/nginx-*.tar.gz
@@ -65,3 +72,4 @@ clean:
 	docker rmi $(IMAGE_NAME)-almalinux8 || true
 	docker rmi $(IMAGE_NAME)-almalinux9 || true
 	docker rmi $(IMAGE_NAME)-rockylinux8 || true
+	docker rmi $(IMAGE_NAME)-rockylinux9 || true
