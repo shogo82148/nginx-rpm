@@ -17,15 +17,16 @@ jobs:
           - amazonlinux2
           - centos7
           - almalinux8
+          - almalinux9
           - rockylinux8
         platform:
           - linux/amd64
           - linux/arm64
 
     steps:
-      - uses: docker/setup-qemu-action@v1
-      - uses: docker/setup-buildx-action@v1
-      - uses: actions/checkout@v2
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+      - uses: actions/checkout@v3
       - name: build
         run: |
           make ${{ matrix.distribution }}
