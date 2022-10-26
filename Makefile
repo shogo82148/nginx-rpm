@@ -1,9 +1,9 @@
-SOURCE_ARCHIVE := nginx-1.21.5.tar.gz
+SOURCE_ARCHIVE := nginx-1.23.2.tar.gz
 TARGZ_FILE := nginx.tar.gz
 IMAGE_NAME := nginx-package
 
 .PHONY: all
-all: amazonlinux2 centos7 almalinux8 almalinux9 rockylinux8
+all: amazonlinux2 centos7 centos8 almalinux8 almalinux9 rockylinux8
 
 .PHONY: amazonlinux2
 amazonlinux2: amazonlinux2.build
@@ -35,7 +35,7 @@ upload:
 	./scripts/upload.pl
 
 .PHONY: test
-test: test-amazonlinux2 test-centos7 test-almalinux8 test-rockylinux8
+test: test-amazonlinux2 test-centos7 test-almalinux8 test-almalinux9 test-rockylinux8
 
 .PHONY: test-amazonlinux2
 test-amazonlinux2:
