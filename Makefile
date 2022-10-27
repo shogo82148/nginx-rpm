@@ -3,7 +3,7 @@ TARGZ_FILE := nginx.tar.gz
 IMAGE_NAME := nginx-package
 
 .PHONY: all
-all: amazonlinux2 centos7 almalinux8 almalinux9 rockylinux8 rockylinux9
+all: amazonlinux2 amazonlinux2022 centos7 almalinux8 almalinux9 rockylinux8 rockylinux9
 
 .PHONY: amazonlinux2
 amazonlinux2: amazonlinux2.build
@@ -41,7 +41,7 @@ upload:
 	./scripts/upload.pl
 
 .PHONY: test
-test: test-amazonlinux2 test-centos7 test-almalinux8 test-almalinux9 test-rockylinux8 test-rockylinux9
+test: test-amazonlinux2 test-amazonlinux2022 test-centos7 test-almalinux8 test-almalinux9 test-rockylinux8 test-rockylinux9
 
 .PHONY: test-amazonlinux2
 test-amazonlinux2:
