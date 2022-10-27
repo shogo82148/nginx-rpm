@@ -8,6 +8,9 @@ all: amazonlinux2 centos7 centos8 almalinux8 almalinux9 rockylinux8
 .PHONY: amazonlinux2
 amazonlinux2: amazonlinux2.build
 
+.PHONY: amazonlinux2022
+amazonlinux2022: amazonlinux2022.build
+
 .PHONY: centos7
 centos7: centos7.build
 
@@ -41,6 +44,10 @@ test: test-amazonlinux2 test-centos7 test-almalinux8 test-almalinux9 test-rockyl
 test-amazonlinux2:
 	./scripts/test.sh amazonlinux2
 
+.PHONY: test-amazonlinux2022
+test-amazonlinux2022:
+	./scripts/test.sh amazonlinux2022
+
 .PHONY: test-centos7
 test-centos7:
 	./scripts/test.sh centos7
@@ -61,6 +68,7 @@ clean:
 	rm -rf *.build.bak *.build
 	rm -rf rpmbuild/SOURCES/nginx-*.tar.gz
 	docker rmi $(IMAGE_NAME)-amazonlinux2 || true
+	docker rmi $(IMAGE_NAME)-amazonlinux2022 || true
 	docker rmi $(IMAGE_NAME)-centos7 || true
 	docker rmi $(IMAGE_NAME)-almalinux8 || true
 	docker rmi $(IMAGE_NAME)-almalinux9 || true
