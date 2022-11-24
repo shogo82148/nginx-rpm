@@ -320,7 +320,7 @@ fi
 * Thu May 27 2021 Ichinose Shogo <shogo82148@gmail.com>
 - 1.21.0
 
-* Wed Apr 17 2021 Ichinose Shogo <shogo82148@gmail.com>
+* Sat Apr 17 2021 Ichinose Shogo <shogo82148@gmail.com>
 - 1.19.10
 
 * Thu Apr 01 2021 Ichinose Shogo <shogo82148@gmail.com>
