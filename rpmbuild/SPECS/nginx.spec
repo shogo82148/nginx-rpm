@@ -59,6 +59,14 @@ BuildRequires: libopenssl-devel
 %define dist .amzn%{?amzn}
 %endif
 
+%if 0%{?amzn} == 2022
+%define epoch 1
+Epoch: %{epoch}
+Requires(pre): shadow-utils
+BuildRequires: openssl-devel >= 3.0.0
+%define _debugsource_template %{nil}
+%endif
+
 # end of distribution specific definitions
 
 %define main_version 1.23.2
