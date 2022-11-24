@@ -70,7 +70,7 @@ BuildRequires: openssl-devel >= 3.0.0
 # end of distribution specific definitions
 
 %define main_version 1.23.2
-%define main_release 1%{?dist}.ngx
+%define main_release 2%{?dist}.ngx
 
 %define bdir %{_builddir}/%{name}-%{main_version}
 
@@ -307,6 +307,9 @@ if [ $1 -ge 1 ]; then
 fi
 
 %changelog
+* Thu Nov 24 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 1.23.2-2
+- introduce Amazon Linux 2022
+
 * Wed Oct 26 2022 ICHINOSE Shogo <shogo82148@gmail.com> - 1.23.2-1
 - 1.23.2
 
