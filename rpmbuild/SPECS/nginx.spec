@@ -59,6 +59,14 @@ BuildRequires: libopenssl-devel
 %define dist .amzn%{?amzn}
 %endif
 
+%if 0%{?amzn} == 2022
+%define epoch 1
+Epoch: %{epoch}
+Requires(pre): shadow-utils
+BuildRequires: openssl-devel >= 3.0.0
+%define _debugsource_template %{nil}
+%endif
+
 # end of distribution specific definitions
 
 %define main_version 1.23.2
@@ -320,7 +328,7 @@ fi
 * Thu May 27 2021 Ichinose Shogo <shogo82148@gmail.com>
 - 1.21.0
 
-* Wed Apr 17 2021 Ichinose Shogo <shogo82148@gmail.com>
+* Sat Apr 17 2021 Ichinose Shogo <shogo82148@gmail.com>
 - 1.19.10
 
 * Thu Apr 01 2021 Ichinose Shogo <shogo82148@gmail.com>
