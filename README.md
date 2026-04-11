@@ -1,3 +1,9 @@
+# NO LONGER MAINTAINED
+
+his repository is no longer maintained.
+
+The RPM packages previously provided here are now officially available. Please use the official ones.
+
 # nginx Unofficial RPM package builder
 
 [![build](https://github.com/shogo82148/nginx-rpm/actions/workflows/build.yml/badge.svg)](https://github.com/shogo82148/nginx-rpm/actions/workflows/build.yml)
